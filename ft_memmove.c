@@ -6,7 +6,7 @@
 /*   By: zjamali <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 19:29:05 by zjamali           #+#    #+#             */
-/*   Updated: 2019/10/22 19:21:35 by zjamali          ###   ########.fr       */
+/*   Updated: 2019/11/02 20:56:08 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ void		*ft_memmove(void *dst, const void *src, size_t len)
 		return (NULL);
 	if (src < dst)
 	{
-		while (len-- > 0)
+		while (len > 0)
 		{
+			len--;
 			pdst[len] = psrc[len];
 		}
 	}

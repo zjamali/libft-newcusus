@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zjamali <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/21 14:57:25 by zjamali           #+#    #+#             */
-/*   Updated: 2019/11/02 19:07:24 by zjamali          ###   ########.fr       */
+/*   Created: 2019/10/31 17:18:18 by zjamali           #+#    #+#             */
+/*   Updated: 2019/11/01 18:53:55 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void		*ft_calloc(size_t count, size_t size)
+void	ft_lstadd_back(t_list **alst, t_list *new)
 {
-	void *ptr;
+	t_list *temp;
 
-	ptr = malloc(count * size);
-	if (ptr == NULL)
-		return (NULL);
-	else
+	if (*alst)
 	{
-		ft_bzero(ptr, size * count);
-		return (ptr);
+		temp = ft_lstlast(*alst);
+		temp->next = new;
+		new->next = NULL;
 	}
+	else
+		*alst = new;
 }
