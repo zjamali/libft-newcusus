@@ -6,7 +6,7 @@
 /*   By: zjamali <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 16:20:55 by zjamali           #+#    #+#             */
-/*   Updated: 2019/11/05 21:58:27 by zjamali          ###   ########.fr       */
+/*   Updated: 2019/11/05 23:13:04 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static t_list	*allocation(t_list *lst, void (*del)(void *))
 	int		len;
 	int		i;
 
+	if (!lst)
+		return (NULL);
 	len = ft_lstsize(lst);
 	newlst = (t_list*)malloc(sizeof(t_list));
 	tempnew = newlst;
@@ -44,8 +46,7 @@ t_list			*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	int		i;
 
 	i = 0;
-	if (!(newlist = allocation(lst, del)))
-		return (NULL);
+	newlist = allocation(lst, del);
 	tempnew = newlist;
 	while (i < ft_lstsize(newlist))
 	{
