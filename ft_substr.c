@@ -24,12 +24,13 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (ft_strdup(""));
 	if (!(str = (char *)malloc(sizeof(char) * (len + 1))))
 		return (ft_strdup(""));
-	while (i < len)
+	while (i < len && s[start])
 	{
 		str[i] = s[start];
 		start++;
 		i++;
 	}
 	str[i] = '\0';
+	ft_bzero((void*)(str + i + 1), len - i);
 	return (str);
 }

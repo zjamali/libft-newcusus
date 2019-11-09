@@ -1,29 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zjamali <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/19 22:04:36 by zjamali           #+#    #+#             */
-/*   Updated: 2019/10/30 16:27:16 by zjamali          ###   ########.fr       */
+/*   Created: 2019/10/31 22:00:57 by zjamali           #+#    #+#             */
+/*   Updated: 2019/10/31 22:27:20 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
-size_t		ft_strlcat(char *dst, const char *src, size_t size)
+void	ft_lstprint(t_list *lst)
 {
-	size_t srclen;
-	size_t dstlen;
+	while(lst)
+	{
+		printf("%s",(char*)lst->content);
+		printf("i");
+		lst = lst->next;
+	}
+}
 
-	srclen = ft_strlen(src);
-	dstlen = ft_strlen(dst);
-	if (size <= dstlen)
-		return (srclen + size);
-	size = size - dstlen;
-	while (*dst)
-		dst++;
-	ft_strlcpy(dst,src,size);
-	return (srclen + dstlen);
+void	ft_lstdelone(t_list *lst, void (*del)(void*))
+{
+	
+
+}
+
+int main()
+{
+	t_list *head;
+	t_list *temp;
+	temp = head;
+	int i = 0;
+	while(i < 5)
+	{
+
+		head= (t_list*)malloc(sizeof(t_list));
+		head->content = "i";
+		head = head->next;
+		i++;
+	}
+	ft_lstprint(temp);
+	return 0;
 }
