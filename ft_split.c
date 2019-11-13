@@ -12,86 +12,95 @@
 
 #include "libft.h"
 
-static void			*leak(char **split)
+static int		words(char *str, char c)
 {
-	int i;
+	int			i;
+	int			j;
 
 	i = 0;
-	while (split[i])
+	j = 0;
+	while (str[i])
 	{
-		free(split[i]);
-		i++;
+		while (str[i] == c && str[i])
+			i++;
+		if (str[i] && str[i] != c)
+		{
+			i++;
+			j++;
+		}
+		while (str[i] && str[i] != c)
+			i++;
 	}
-	free(split);
+	return (j);
+}
+
+static void		*leak(char **spl, int j)
+{
+	j = j - 1;
+	while (spl[j])
+	{
+		free(spl[j]);
+		j--;
+	}
+	free(spl);
 	return (NULL);
 }
 
-static int			nmwords(char const *s, char c)
+static int		carcts(char *str, char c)
 {
-	int i;
-	int words;
+	int			i;
 
 	i = 0;
-	words = 0;
-	while (s[i])
+	while (str[i] && str[i] != c)
 	{
-		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
-			words++;
 		i++;
 	}
-	return (words);
+	return (i);
 }
 
-static int			nmchars(char const *s, char c, int i)
+static char		*allocandfill(char **tab, char *src, char c)
 {
-	int size;
+	int			i;
+	int			j;
+	int			k;
 
-	size = 0;
-	while (s[i] && s[i] != c)
+	j = 0;
+	k = 0;
+	while (src[k] == c)
+		k++;
+	while (j < words(src, c))
 	{
-		size++;
-		i++;
+		i = 0;
+		if (!(tab[j] = malloc(sizeof(char) * (carcts(&src[k], c) + 1))))
+			return (leak(tab, j));
+		while (src[k] != c && src[k])
+			tab[j][i++] = src[k++];
+		tab[j][i] = '\0';
+		while (src[k] == c && src[k])
+			k++;
+		j++;
 	}
-	return (size);
+	tab[j] = NULL;
+	return (*tab);
 }
 
-static void			fillin(char const *s, int i, char tab[], int len)
+char			**ft_split(char const *s, char c)
 {
-	int k;
+	int			i;
+	int			j;
+	int			k;
+	char		**tab;
+	char		*str;
 
 	k = 0;
-	while (k < len)
-	{
-		tab[k++] = s[i++];
-	}
-	tab[k] = '\0';
-}
-
-char				**ft_split(char const *s, char c)
-{
-	int		i;
-	int		j;
-	char	**tab;
-	int		words;
-	int		len;
-
 	i = 0;
+	j = 0;
 	if (!s)
 		return (NULL);
-	words = nmwords(s, c);
-	if (!(tab = malloc(sizeof(char*) * (words + 1))))
+	str = (char *)s;
+	tab = malloc(sizeof(char *) * (words(str, c) + 1));
+	if (!tab)
 		return (NULL);
-	tab[words] = NULL;
-	j = 0;
-	while (words--)
-	{
-		while (s[i] == c)
-			i++;
-		len = nmchars(s, c, i);
-		if (!(tab[j++] = malloc(sizeof(char) * ((len + 1)))))
-			return (leak(tab));
-		fillin(s, i, tab[j - 1], len);
-		i = i + len;
-	}
+	tab[j] = allocandfill(tab, str, c);
 	return (tab);
 }

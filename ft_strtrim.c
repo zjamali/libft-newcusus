@@ -12,58 +12,64 @@
 
 #include "libft.h"
 
-static int		ft_beginstr(char const *s1, char const *set)
+char	*strstart(char *str, char *set)
 {
 	int i;
+	int j;
 
 	i = 0;
-	while (s1[i])
+	j = 0;
+	while (str[i] && set[j])
 	{
-		if (!(ft_strchr(set, s1[i])))
-			return (i);
-		i++;
-	}
-	return (i);
-}
-
-static int		ft_endstr(char const *s1, char const *set)
-{
-	size_t i;
-
-	i = ft_strlen(s1);
-	while (i > 0)
-	{
-		if (!(ft_strchr(set, s1[i])))
-			return (i);
-		i--;
-	}
-	return (i);
-}
-
-char			*ft_strtrim(char const *s1, char const *set)
-{
-	int		indb;
-	int		inde;
-	int		i;
-	char	*res;
-
-	if (s1 && set)
-	{
-		indb = ft_beginstr(s1, set);
-		inde = ft_endstr(s1, set);
-		if (inde - indb < 0)
-			return ("");
-		if (!(res = (char *)malloc(sizeof(char) * (inde - indb + 2))))
-			return (NULL);
-		i = 0;
-		while (indb <= inde)
+		if (str[i] == set[j])
 		{
-			res[i] = s1[indb];
-			indb++;
 			i++;
+			j = 0;
 		}
-		res[i] = '\0';
-		return (res);
+		else
+			j++;
 	}
-	return (NULL);
+	return (&str[i]);
+}
+
+int		strend(char *str, char *set)
+{
+	int		i;
+	int		j;
+
+	i = ft_strlen(str);
+	j = 0;
+	while (i > 0 && set[j])
+	{
+		if (str[i - 1] == set[j])
+		{
+			i--;
+			j = 0;
+		}
+		else
+			j++;
+	}
+	return (i);
+}
+
+char	*ft_strtrim(char const *s1, char const *set)
+{
+	char		*tab;
+	char		*delt;
+	char		*ptr;
+	char		*string;
+	size_t		i;
+
+	tab = (char *)s1;
+	delt = (char *)set;
+	if (!s1 || !set)
+		return (NULL);
+	string = strstart(tab, delt);
+	i = strend(string, delt);
+	ptr = malloc(sizeof(char) * i + 1);
+	if (!ptr)
+		return (NULL);
+	ft_memcpy(ptr, string, i);
+	ptr[i] = '\0';
+	return (ptr);
 }
