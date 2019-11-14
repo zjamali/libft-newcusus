@@ -12,48 +12,65 @@
 
 #include "libft.h"
 
-static int		much(int n)
+int		countnbr(int n)
 {
-	int counter;
+	int index;
 
-	counter = 0;
-	if (n < 0)
-		counter++;
+	index = 0;
 	if (n == 0)
-		counter++;
+		return (1);
 	while (n != 0)
 	{
 		n = n / 10;
-		counter++;
+		index++;
 	}
-	return (counter);
+	return (index);
 }
 
-char			*ft_itoa(int n)
+char	*ft_itoapos(int n)
 {
-	char	*str;
-	int		len;
-	int		c;
-	int		res;
+	char	*p;
+	int		a;
 
-	len = much(n);
-	c = 0;
-	if (!(str = (char *)malloc(sizeof(char) * (len + 1))))
-		return (NULL);
-	str[len--] = '\0';
+	if (n >= 0)
+	{
+		a = countnbr(n);
+		if (!(p = malloc(sizeof(char) * (a + 1))))
+			return (NULL);
+		p[a] = '\0';
+		a--;
+		while (a >= 0)
+		{
+			p[a] = n % 10 + '0';
+			n = n / 10;
+			a--;
+		}
+		return (p);
+	}
+	return (NULL);
+}
+
+char	*ft_itoa(int n)
+{
+	char	*p;
+	int		a;
+
+	if (n >= 0)
+		return (p = ft_itoapos(n));
 	if (n < 0)
 	{
-		c = 1;
-		str[0] = '-';
+		a = countnbr(n);
+		if (!(p = malloc(sizeof(char) * (a + 2))))
+			return (NULL);
+		p[a + 1] = '\0';
+		p[0] = '-';
+		while (a > 0)
+		{
+			p[a] = (n % 10) * -1 + '0';
+			n = n / 10;
+			a--;
+		}
+		return (p);
 	}
-	while (len >= c)
-	{
-		if (n < 0)
-			res = (n % 10) * -1;
-		else
-			res = n % 10;
-		str[len--] = res + '0';
-		n = n / 10;
-	}
-	return (str);
+	return (NULL);
 }
