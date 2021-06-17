@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zjamali <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 02:19:30 by zjamali           #+#    #+#             */
-/*   Updated: 2019/11/13 18:00:39 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/06/17 13:57:31 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		check(int s, int counter, int result)
+static int	check(int s, int counter, int result)
 {
 	if (counter > 19)
 	{
@@ -24,7 +24,7 @@ static int		check(int s, int counter, int result)
 	return (s * result);
 }
 
-int				ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
 	int		i;
 	int		s;
@@ -36,7 +36,7 @@ int				ft_atoi(const char *str)
 	s = 1;
 	result = 0;
 	while (str[i] == '\t' || str[i] == '\n' || str[i] == ' '
-			|| str[i] == '\v' || str[i] == '\r' || str[i] == '\f')
+		|| str[i] == '\v' || str[i] == '\r' || str[i] == '\f')
 		i++;
 	if (str[i] == '-' || str[i] == '+')
 	{

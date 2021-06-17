@@ -3,22 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zjamali <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 17:43:53 by zjamali           #+#    #+#             */
-/*   Updated: 2019/11/09 15:25:03 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/06/17 14:05:38 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_strdup(const char *s1)
+char	*ft_strdup(const char *s1)
 {
 	size_t	size;
 	char	*s2;
 
 	size = ft_strlen(s1);
-	if (!(s2 = (char*)malloc(sizeof(char) * (size + 1))))
+	s2 = (char *)malloc(sizeof(char) * (size + 1));
+	if (!s2)
 		return (NULL);
 	else
 	{

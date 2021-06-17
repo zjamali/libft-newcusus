@@ -6,13 +6,13 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 23:27:26 by zjamali           #+#    #+#             */
-/*   Updated: 2019/11/13 17:35:25 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/06/17 14:04:35 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		words(char *str, char c)
+static int	words(char *str, char c)
 {
 	int			i;
 	int			j;
@@ -34,7 +34,7 @@ static int		words(char *str, char c)
 	return (j);
 }
 
-static void		*leak(char **spl, int j)
+static void	*leak(char **spl, int j)
 {
 	j = j - 1;
 	while (spl[j])
@@ -46,7 +46,7 @@ static void		*leak(char **spl, int j)
 	return (NULL);
 }
 
-static int		carcts(char *str, char c)
+static int	carcts(char *str, char c)
 {
 	int			i;
 
@@ -58,7 +58,7 @@ static int		carcts(char *str, char c)
 	return (i);
 }
 
-static char		*allocandfill(char **tab, char *src, char c)
+static char	*allocandfill(char **tab, char *src, char c)
 {
 	int			i;
 	int			j;
@@ -71,7 +71,8 @@ static char		*allocandfill(char **tab, char *src, char c)
 	while (j < words(src, c))
 	{
 		i = 0;
-		if (!(tab[j] = malloc(sizeof(char) * (carcts(&src[k], c) + 1))))
+		tab[j] = malloc(sizeof(char) * (carcts(&src[k], c) + 1));
+		if (!tab[j])
 			return (leak(tab, j));
 		while (src[k] != c && src[k])
 			tab[j][i++] = src[k++];
@@ -84,7 +85,7 @@ static char		*allocandfill(char **tab, char *src, char c)
 	return (*tab);
 }
 
-char			**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	int			i;
 	int			j;

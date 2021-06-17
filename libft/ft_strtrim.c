@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zjamali <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 16:31:40 by zjamali           #+#    #+#             */
-/*   Updated: 2019/11/13 17:34:35 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/06/17 14:07:12 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*strstart(char *str, char *set)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
@@ -32,7 +32,7 @@ char	*strstart(char *str, char *set)
 	return (&str[i]);
 }
 
-int		strend(char *str, char *set)
+int	strend(char *str, char *set)
 {
 	int		i;
 	int		j;
